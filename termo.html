@@ -270,21 +270,8 @@ canvas#sigCanvas:focus{border-color:rgba(192,125,87,.55)}
     </div>
 
     <div class="card" style="margin-top:20px">
-      <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px">Testemunhas (opcional, mas recomendado)</div>
-      <div style="margin-bottom:18px">
-        <div style="font-size:12px;color:var(--honey);font-weight:600;margin-bottom:8px">Testemunha 1</div>
-        <div class="grid2">
-          <div class="field"><label>Nome completo</label><input type="text" id="test1nome" placeholder="Nome da testemunha"></div>
-          <div class="field"><label>CPF</label><input type="text" id="test1cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14"></div>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:12px;color:var(--honey);font-weight:600;margin-bottom:8px">Testemunha 2</div>
-        <div class="grid2">
-          <div class="field"><label>Nome completo</label><input type="text" id="test2nome" placeholder="Nome da testemunha"></div>
-          <div class="field"><label>CPF</label><input type="text" id="test2cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14"></div>
-        </div>
-      </div>
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px">Testemunha</div>
+      <div class="info-note" style="margin-top:0"><strong>Testemunha do contrato:</strong> Pedro Henrique Macedo Paz (CPF 017.507.301-54), já incluído automaticamente no documento.</div>
     </div>
 
     <div class="btnrow" style="margin-top:20px">
@@ -617,41 +604,36 @@ function buildPDF(){
     y += 26;
   }
 
-  doc.setDrawColor(120,100,80); doc.setLineWidth(0.3);
-  doc.line(M, y, M+80, y); nl(4);
-  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-  doc.text(state.signame||state.guests[0]?.nome||'Locatário', M, y); nl(4);
-  doc.setFontSize(8); doc.setTextColor(120,120,120);
-  doc.text('LOCATÁRIO', M, y); nl(8);
-
-  doc.line(W-M-80, y-8+4, W-M, y-8+4);
-  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-  doc.text('Roberta Gebrin Las Casas', W-M-80, y-4);
-  doc.setFontSize(8); doc.setTextColor(120,120,120);
-  doc.text('LOCADORA', W-M-80, y);
-
-  // Testemunhas
-  if(state.test1nome || state.test2nome){
-    nl(14);
-    doc.setFontSize(8.5); doc.setFont('helvetica','bold'); doc.setTextColor(120,90,50);
-    doc.text('TESTEMUNHAS', M, y); nl(8);
-    if(state.test1nome){
-      doc.setDrawColor(120,100,80); doc.setLineWidth(0.3);
-      doc.line(M, y, M+80, y); nl(4);
-      doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-      doc.text(state.test1nome, M, y); nl(4);
-      if(state.test1cpf){ doc.setFontSize(8); doc.setTextColor(120,120,120); doc.text('CPF: '+state.test1cpf, M, y); nl(4); }
-    }
-    if(state.test2nome){
-      const tx = state.test1nome ? W-M-80 : M;
-      const ty_offset = state.test1nome ? -(state.test1cpf ? 16 : 12) : 0;
-      doc.line(tx, y+ty_offset, tx+80, y+ty_offset);
-      doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-      doc.text(state.test2nome, tx, y+ty_offset+4);
-      if(state.test2cpf){ doc.setFontSize(8); doc.setTextColor(120,120,120); doc.text('CPF: '+state.test2cpf, tx, y+ty_offset+8); }
-    }
-    nl(4);
+  // --- Assinaturas (duas colunas alinhadas) ---
+  const COLW = 80;
+  const leftX = M;
+  const rightX = W - M - COLW;
+  const sigH = 22;
+  const lineY = y + sigH;            // mesma linha-base para locatario e locadora
+  if(hasSig && state.sigDataUrl){
+    try{ doc.addImage(state.sigDataUrl,'PNG', leftX, y, COLW, sigH); }catch(e){}
   }
+  doc.setDrawColor(120,100,80); doc.setLineWidth(0.3);
+  doc.line(leftX, lineY, leftX+COLW, lineY);
+  doc.line(rightX, lineY, rightX+COLW, lineY);
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+  doc.text(state.signame||state.guests[0]?.nome||'Locatário', leftX, lineY+5);
+  doc.text('Roberta Gebrin Las Casas', rightX, lineY+5);
+  doc.setFontSize(8); doc.setTextColor(120,120,120);
+  doc.text('LOCATÁRIO', leftX, lineY+10);
+  doc.text('LOCADORA', rightX, lineY+10);
+  y = lineY + 18;
+
+  // --- Testemunha (Pedro, fixa) ---
+  doc.setFontSize(8.5); doc.setFont('helvetica','bold'); doc.setTextColor(120,90,50);
+  doc.text('TESTEMUNHA', leftX, y); nl(10);
+  doc.setDrawColor(120,100,80); doc.setLineWidth(0.3);
+  doc.line(leftX, y, leftX+COLW, y);
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+  doc.text('Pedro Henrique Macedo Paz', leftX, y+5);
+  doc.setFontSize(8); doc.setTextColor(120,120,120);
+  doc.text('CPF: 017.507.301-54', leftX, y+10);
+  y += 14;
 
   // Footer
   y += 12; rule();
@@ -667,10 +649,6 @@ document.getElementById('generatePDF').addEventListener('click',()=>{
   if(!name && !hasSig){ fn.classList.add('has-error'); return; }
   fn.classList.remove('has-error');
   state.signame   = name || state.guests[0]?.nome || 'Locatário';
-  state.test1nome = document.getElementById('test1nome').value.trim();
-  state.test1cpf  = document.getElementById('test1cpf').value.trim();
-  state.test2nome = document.getElementById('test2nome').value.trim();
-  state.test2cpf  = document.getElementById('test2cpf').value.trim();
   if(hasSig) state.sigDataUrl = canvas.toDataURL('image/png');
 
   const doc = buildPDF();
@@ -690,15 +668,7 @@ document.getElementById('generatePDF').addEventListener('click',()=>{
   setStep(5);
 });
 
-// CPF mask testemunhas
-['test1cpf','test2cpf'].forEach(id=>{
-  document.getElementById(id).addEventListener('input', function(){
-    this.value = this.value.replace(/\D/g,'').substring(0,11)
-      .replace(/(\d{3})(\d)/,'$1.$2')
-      .replace(/(\d{3})(\d)/,'$1.$2')
-      .replace(/(\d{3})(\d{1,2})$/,'$1-$2');
-  });
-});
+// (testemunha fixa: Pedro Henrique Macedo Paz)
 
 document.getElementById('dlAgain').addEventListener('click',()=>{
   if(window._lastDoc) window._lastDoc.save(window._lastFname);
