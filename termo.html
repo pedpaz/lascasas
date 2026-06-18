@@ -184,7 +184,7 @@ canvas#sigCanvas:focus{border-color:rgba(192,125,87,.55)}
         <label>Animais de estimação?</label>
         <select id="pets">
           <option value="nao">Não</option>
-          <option value="sim">Sim (taxa de R$ 150/diária + limpeza se necessário)</option>
+          <option value="sim">Sim (taxa adicional a combinar)</option>
         </select>
       </div>
       <div class="info-note"><strong>Atenção:</strong> Check-in a partir das 15h · Check-out até as 12h. Saída fora do prazo sujeita a multa de R$ 2.000/dia.</div>
@@ -202,10 +202,10 @@ canvas#sigCanvas:focus{border-color:rgba(192,125,87,.55)}
     <p class="screen-sub">Leia atentamente antes de prosseguir.</p>
     <div class="card">
       <div class="rules-box">
-        <div class="rule-item"><strong>1. Imóvel</strong>Casa localizada em Pirenópolis–GO, na Rua Fazenda Lavras do Abade, Zona Rural. Duas suítes, sala integrada com cozinha completa, banheiro social, varandas, Wi-Fi, churrasqueira, garagem e piscina, com todas as suas mobílias, eletrodomésticos e utensílios.</div>
+        <div class="rule-item"><strong>1. Imóvel</strong>Casa localizada na Fazenda Lavras do Abade, Q. Área, L. Área, S/N — Estrada km 04, à direita, +1 km, Zona Rural, Pirenópolis–GO, CEP 72980-000. Duas suítes, sala integrada com cozinha completa, banheiro social, varandas, Wi-Fi, churrasqueira, garagem e piscina, com todas as suas mobílias, eletrodomésticos e utensílios.</div>
         <div class="rule-item"><strong>2. Capacidade</strong>Capacidade máxima conforme reserva. Hóspedes adicionais detectados sem autorização prévia serão cobrados à taxa de R$ 500,00 por pessoa.</div>
         <div class="rule-item"><strong>3. Utilização do imóvel</strong>O imóvel deve ser utilizado exclusivamente para fins de veraneio/temporada residencial. Eventos somente com autorização expressa da locadora, sob pena de cobrança de 10 (dez) diárias.</div>
-        <div class="rule-item"><strong>4. Animais de estimação</strong>Permitidos mediante informação prévia, sujeito a taxa extra de R$ 150,00 por diária. O locatário se compromete a: a) não utilizar o enxoval da casa (roupas de cama, toalhas) com os animais; b) não permitir que o animal suba em camas e/ou sofás; c) responsabilizar-se pela coleta de fezes. Em caso de fezes ou urina no imóvel, será cobrada taxa de limpeza de R$ 150,00. O descumprimento dessas condições sujeita o locatário a multa adicional de R$ 1.000,00.</div>
+        <div class="rule-item"><strong>4. Animais de estimação</strong>Permitidos mediante informação prévia, sujeito a taxa adicional (valor a combinar com a locadora). O locatário se compromete a: a) não utilizar o enxoval da casa (roupas de cama, toalhas) com os animais; b) não permitir que o animal suba em camas e/ou sofás; c) responsabilizar-se pela coleta de fezes. Em caso de fezes ou urina no imóvel, será cobrada taxa de limpeza de R$ 150,00. O descumprimento dessas condições sujeita o locatário a multa adicional de R$ 1.000,00.</div>
         <div class="rule-item"><strong>5. Proibição de crianças</strong>Crianças de 9 meses a 14 anos são expressamente proibidas, por risco de acidentes.</div>
         <div class="rule-item"><strong>6. Proibição de fumar</strong>É expressamente proibido fumar dentro do imóvel. Em áreas externas, o descarte deve ser feito com cuidado, dado o risco de incêndio no cerrado. O descumprimento sujeita o locatário a taxa de higienização de R$ 300,00.</div>
         <div class="rule-item"><strong>7. Responsabilidades do locatário</strong>
@@ -561,7 +561,7 @@ function buildPDF(){
     doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(150,120,80);
     doc.text('5. ANIMAIS DE ESTIMAÇÃO', M, y); nl(5);
     doc.setFont('helvetica','normal'); doc.setTextColor(30,30,30);
-    const petsLines = doc.splitTextToSize('O locatário declarou trazer animal(is) de estimação, incidindo taxa de R$ 150,00 por diária. O locatário se compromete a: a) não utilizar o enxoval da casa com os animais; b) não permitir que o animal suba em camas e/ou sofás; c) responsabilizar-se pela coleta de fezes. Em caso de fezes ou urina no imóvel, taxa adicional de limpeza de R$ 150,00. O descumprimento dessas condições sujeita o locatário a multa de R$ 1.000,00.', TW);
+    const petsLines = doc.splitTextToSize('O locatário declarou trazer animal(is) de estimação, incidindo taxa adicional (valor a combinar com a locadora). O locatário se compromete a: a) não utilizar o enxoval da casa com os animais; b) não permitir que o animal suba em camas e/ou sofás; c) responsabilizar-se pela coleta de fezes. Em caso de fezes ou urina no imóvel, taxa adicional de limpeza de R$ 150,00. O descumprimento dessas condições sujeita o locatário a multa de R$ 1.000,00.', TW);
     doc.text(petsLines, M, y); y += petsLines.length*4.5; nl(4);
   }
 
