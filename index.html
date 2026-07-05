@@ -133,6 +133,9 @@ ul.clean li b{color:var(--bone);font-weight:600}
 .ctrl-txt span{display:block;color:var(--text-2);font-size:13.5px;line-height:1.5;margin-top:2px}
 .ctrl-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);color:var(--text-3);font-size:12.5px;line-height:1.55;position:relative}
 @media(max-width:560px){.ctrl-body{flex-direction:column;gap:18px}.ctrl-remote{flex:0 0 auto}.ctrl-remote img{width:140px}}
+.vidwrap{margin-top:16px}
+.vidplayer{display:block;width:100%;max-width:300px;margin:0 auto;border:1px solid var(--line);border-radius:14px;background:#000}
+.vidcap{display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;color:var(--text-3);font-size:12.5px;margin-top:9px}
 .photofig{margin-top:20px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(35,41,37,.4)}
 .photofig img{width:100%;height:auto;display:block}
 
@@ -318,6 +321,14 @@ footer .small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color
     <ul class="clean" style="margin-top:14px">
       <li><span class="dot"></span><div>Digite 8585 e toque no ✅ (canto inferior esquerdo) para destravar. Toda porta tem tranca: quando aparece o ponto vermelho na fechadura, significa que está trancada.</div></li>
     </ul>
+
+    <div class="vidwrap">
+      <video class="vidplayer" controls playsinline preload="metadata" poster="porta-poster.jpg">
+        <source src="porta.mp4" type="video/mp4">
+        Seu navegador não reproduz o vídeo. <a href="porta.mp4" style="color:var(--clay)">Baixe aqui</a>.
+      </video>
+      <div class="vidcap"><span>▶</span> Vídeo: como destravar a fechadura da porta</div>
+    </div>
     <p class="lede" style="margin-top:14px">Precisa de <b style="color:var(--bone)">early check-in</b> ou <b style="color:var(--bone)">late check-out</b>? Fale com a gente pelo WhatsApp — sempre que possível, a gente dá um jeito.</p>
   </section>
 
