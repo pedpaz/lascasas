@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contrato de Locação por Temporada · Las Casas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1;
+    --shell:#E7E0D2;
+    --ink:#2B2A24;
+    --ink-soft:#5A574C;
+    --forest:#26302A;
+    --forest-2:#333F35;
+    --ochre:#B5673A;
+    --ochre-soft:#e7c9b3;
+    --sage:#8A9178;
+    --line:#D8D0BE;
+    --field:#F2ECDD;
+    --field-focus:#FBEFE1;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--shell);
+    color:var(--ink);
+    font-family:'Manrope',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    background-image:radial-gradient(rgba(43,42,36,.03) 1px,transparent 1px);
+    background-size:4px 4px;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+
+  /* ---------- Cabeçalho / marca ---------- */
+  header.brand{
+    background:var(--forest);
+    color:#F3EEE1;
+    border-radius:var(--radius);
+    padding:34px 30px 30px;
+    position:relative;
+    overflow:hidden;
+    background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:4px 4px;
+  }
+  .eyebrow{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--ochre-soft);font-weight:600;margin:0 0 14px;
+  }
+  .wordmark{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(38px,9vw,64px);line-height:.95;letter-spacing:.01em;
+    margin:0;color:#F7F2E8;
+  }
+  .wordmark em{font-style:italic;font-weight:400;color:var(--ochre-soft)}
+  .brand-sub{
+    margin:16px 0 0;font-size:13.5px;color:#C9C4B4;letter-spacing:.02em;
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+  }
+  .brand-sub .dot{width:4px;height:4px;border-radius:50%;background:var(--ochre)}
+  .rule-ochre{height:2px;width:64px;background:var(--ochre);margin:22px 0 0;border-radius:2px}
+
+  /* ---------- Painel de dados (não imprime) ---------- */
+  .panel{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    margin:18px 0;padding:22px 22px 8px;
+  }
+  .panel h2{
+    font-family:'Fraunces',serif;font-weight:500;font-size:19px;margin:0 0 4px;color:var(--forest-2);
+  }
+  .panel .hint{font-size:13px;color:var(--ink-soft);margin:0 0 18px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .grid .full{grid-column:1 / -1}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .field label{
+    display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:600;margin:0 0 5px;
+  }
+  .field input,.field textarea,.field select{
+    width:100%;border:1px solid var(--line);background:var(--field);
+    border-radius:9px;padding:11px 12px;font:inherit;font-size:15px;color:var(--ink);
+    transition:border-color .15s,background .15s;
+  }
+  .field textarea{min-height:74px;resize:vertical;line-height:1.55}
+  .field input:focus,.field textarea:focus,.field select:focus{
+    outline:none;border-color:var(--ochre);background:var(--field-focus);
+  }
+  details.admin{margin:6px 0 16px;border:1px dashed var(--line);border-radius:11px;background:#FCFAF4}
+  details.admin>summary{
+    cursor:pointer;padding:13px 16px;font-size:13px;font-weight:600;color:var(--forest-2);
+    letter-spacing:.02em;list-style:none;display:flex;align-items:center;gap:8px;
+  }
+  details.admin>summary::-webkit-details-marker{display:none}
+  details.admin>summary::before{content:"▸";color:var(--ochre);transition:transform .15s}
+  details.admin[open]>summary::before{transform:rotate(90deg)}
+  details.admin .grid{padding:0 16px 14px}
+
+  /* ---------- Documento / contrato ---------- */
+  .doc{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:44px 46px;box-shadow:0 1px 0 rgba(0,0,0,.02);
+  }
+  @media(max-width:560px){.doc{padding:30px 22px}}
+  .doc-title{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,4.5vw,29px);
+    color:var(--forest-2);margin:0 0 4px;line-height:1.15;letter-spacing:.01em;
+  }
+  .doc-title-sub{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);font-weight:600;margin:0 0 26px}
+
+  .clause{margin:0 0 20px}
+  .clause h3{
+    font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--forest-2);margin:0 0 6px;
+    display:flex;gap:9px;align-items:baseline;
+  }
+  .clause h3 .num{
+    font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--ochre);
+    letter-spacing:0;text-transform:none;flex:0 0 auto;
+  }
+  .clause p{margin:0 0 8px;font-size:15px;color:var(--ink)}
+  .clause p:last-child{margin-bottom:0}
+  .sub{margin:8px 0 0;padding:0 0 0 4px}
+  .sub li{margin:0 0 7px;font-size:14.5px;color:var(--ink);list-style:none;padding-left:22px;position:relative}
+  .sub li::before{content:attr(data-mark);position:absolute;left:0;color:var(--ochre);font-weight:600}
+
+  /* campos preenchidos que aparecem no contrato */
+  .f{
+    color:var(--forest-2);font-weight:600;
+    border-bottom:1px solid var(--ochre-soft);padding:0 2px;
+    white-space:pre-wrap;
+  }
+  .f.empty{color:#B7AE98;font-weight:500;font-style:italic}
+
+  /* ---------- Assinaturas ---------- */
+  .sign-wrap{margin-top:34px;border-top:1px solid var(--line);padding-top:26px}
+  .accept{
+    display:flex;gap:11px;align-items:flex-start;background:#F4EFE2;border:1px solid var(--line);
+    border-radius:11px;padding:14px 16px;margin:0 0 22px;font-size:14px;color:var(--ink);
+  }
+  .accept input{margin-top:3px;width:18px;height:18px;accent-color:var(--ochre);flex:0 0 auto}
+  .sigs{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:560px){.sigs{grid-template-columns:1fr}}
+  .sig h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:0 0 8px}
+  .pad{
+    border:1px solid var(--line);border-radius:10px;background:#fff;position:relative;
+    touch-action:none;overflow:hidden;
+  }
+  .pad canvas{display:block;width:100%;height:150px}
+  .pad .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#C3BAA5;font-size:13px;pointer-events:none}
+  .pad.signed .ph{display:none}
+  .sig-line{border-top:1px solid var(--ink);margin-top:10px;padding-top:7px;font-size:13px;color:var(--ink-soft)}
+  .sig-line strong{color:var(--ink);font-weight:600;display:block;font-size:14px}
+  .owner-box{border:1px solid var(--line);border-radius:10px;background:#FCFAF4;height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px}
+  .owner-box span{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:var(--forest-2)}
+  .stamp{margin-top:18px;font-size:12px;color:var(--ink-soft);letter-spacing:.02em}
+
+  /* ---------- Barra de ações ---------- */
+  .toolbar{
+    display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px;
+  }
+  button.act{
+    font:inherit;font-weight:600;font-size:14.5px;border-radius:11px;padding:13px 22px;cursor:pointer;
+    border:1px solid transparent;transition:transform .08s,filter .15s;
+  }
+  button.act:active{transform:translateY(1px)}
+  .btn-primary{background:var(--forest);color:#F3EEE1}
+  .btn-primary:hover{filter:brightness(1.12)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--forest-2)}
+  .btn-ghost:hover{background:#F1EBDD}
+  .note{max-width:640px;margin:20px auto 0;text-align:center;font-size:12px;color:var(--ink-soft);line-height:1.6}
+
+  /* ---------- Impressão ---------- */
+  @media print{
+    body{background:#fff;background-image:none}
+    .wrap{max-width:none;padding:0}
+    .no-print{display:none !important}
+    .doc{border:none;border-radius:0;box-shadow:none;padding:0}
+    header.brand{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .f{border-bottom:none;color:#000}
+    .accept{display:none}
+    .pad{border:none}
+    .sig-line{border-color:#000}
+    .clause{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MARCA -->
+  <header class="brand">
+    <p class="eyebrow">Locação por Temporada</p>
+    <h1 class="wordmark">Las <em>Casas</em></h1>
+    <p class="brand-sub"><span>Pirenópolis · Goiás</span><span class="dot"></span><span>Reserva direta</span></p>
+    <div class="rule-ochre"></div>
+  </header>
+
+  <!-- PAINEL DE DADOS (não imprime) -->
+  <section class="panel no-print" aria-label="Dados da reserva">
+    <h2>Dados da reserva</h2>
+    <p class="hint">Preencha os campos abaixo. O contrato ao lado é preenchido automaticamente. Ao final, o hóspede assina no campo de assinatura.</p>
+
+    <div class="grid">
+      <div class="field full"><label>Nome completo do locatário</label><input data-k="nome" placeholder="Nome do hóspede"></div>
+      <div class="field"><label>CPF</label><input data-k="cpf" placeholder="000.000.000-00"></div>
+      <div class="field"><label>RG</label><input data-k="rg" placeholder="0000000"></div>
+      <div class="field"><label>E-mail</label><input data-k="email" type="email" placeholder="email@exemplo.com"></div>
+      <div class="field"><label>WhatsApp</label><input data-k="whats" placeholder="(62) 90000-0000"></div>
+      <div class="field full"><label>Endereço completo</label><input data-k="endereco" placeholder="Rua, nº, bairro, cidade – UF, CEP"></div>
+
+      <div class="field"><label>Nº de diárias</label><input data-k="diarias" placeholder="1"></div>
+      <div class="field"><label>Nº de hóspedes</label><input data-k="pessoas" placeholder="2"></div>
+      <div class="field"><label>Check-in (data)</label><input data-k="checkin" type="date"></div>
+      <div class="field"><label>Check-out (data)</label><input data-k="checkout" type="date"></div>
+
+      <div class="field"><label>Valor total (R$)</label><input data-k="valor" placeholder="1.000,00"></div>
+      <div class="field"><label>Valor por extenso</label><input data-k="valor_ext" placeholder="mil reais"></div>
+      <div class="field full"><label>Condições de pagamento</label><textarea data-k="pgto">em duas parcelas iguais, sendo a primeira paga no ato da assinatura deste contrato e a segunda na data da chegada ao imóvel, como condição para liberação da senha de entrada.</textarea></div>
+      <div class="field"><label>Animais de estimação</label><select data-k="pet"><option value="permitidos, mediante a taxa prevista na cláusula 7ª">Permitidos (com taxa)</option><option value="não permitidos">Não permitidos</option></select></div>
+      <div class="field"><label>Cidade e data da assinatura</label><input data-k="local_data" placeholder="Goiânia, 10 de julho de 2026"></div>
+    </div>
+
+    <details class="admin">
+      <summary>Dados fixos — locadora e imóvel (editar se necessário)</summary>
+      <div class="grid">
+        <div class="field full"><label>Qualificação da locadora</label><textarea data-k="locadora">ROBERTA GEBRIN LAS CASAS, brasileira, advogada, casada, inscrita no CPF sob nº 803.999.241-91, portadora do RG nº 3487272 – SSPGO, e-mail: robertagebrin@hotmail.com, WhatsApp (62) 98188-0302, residente e domiciliada na Av. G, nº 120, apto. 1200, Setor Oeste, Goiânia – Goiás, CEP 74110-070</textarea></div>
+        <div class="field full"><label>Dados bancários (cláusula 5ª)</label><input data-k="banco" value="Banco do Brasil, Agência 3596-3, Conta 7764-X, PIX +5562981880302, CPF 803.999.241-91"></div>
+        <div class="field full"><label>Descrição do imóvel</label><textarea data-k="imovel">Casa localizada em Pirenópolis, Estado de Goiás, na Rua Fazenda Lavras do Abade, Zona Rural, contendo duas suítes, sala de estar integrada com cozinha completa, banheiro social, varandas, Wi-Fi, churrasqueira a carvão, garagem e piscina externas, com todas as suas mobílias, eletrodomésticos e utensílios</textarea></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- DOCUMENTO -->
+  <section class="doc" id="doc">
+    <h2 class="doc-title">Contrato de Locação por Temporada</h2>
+    <p class="doc-title-sub">Instrumento particular</p>
+
+    <div class="clause">
+      <h3><span class="num">1ª</span> Locadora</h3>
+      <p><span class="f" data-f="locadora"></span>.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">2ª</span> Locatário</h3>
+      <p><span class="f" data-f="nome">___</span>, inscrito no CPF sob o nº <span class="f" data-f="cpf">___</span>, portador do RG nº <span class="f" data-f="rg">___</span>, e-mail: <span class="f" data-f="email">___</span>, WhatsApp: <span class="f" data-f="whats">___</span>, residente e domiciliado na <span class="f" data-f="endereco">___</span>.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">3ª</span> Imóvel</h3>
+      <p><span class="f" data-f="imovel"></span>.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">4ª</span> Prazo</h3>
+      <p>O prazo de vigência desta locação será de <span class="f" data-f="diarias">___</span> diária(s), contada a partir das 12h00 do dia <span class="f" data-f="checkin">___</span> até às 12h00 do dia <span class="f" data-f="checkout">___</span>, data em que se encerra o presente. O prazo não poderá ser prorrogado sem expressa anuência das partes, sendo que, caso o LOCATÁRIO não desocupe o imóvel na data estipulada, ficará sujeito ao pagamento de multa diária no valor de R$ 2.000,00 (dois mil reais).</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">5ª</span> Preço</h3>
+      <p>O preço total da locação é de R$ <span class="f" data-f="valor">___</span> (<span class="f" data-f="valor_ext">___</span>), a ser quitado por meio de PIX ou transferência bancária para a conta corrente da LOCADORA (<span class="f" data-f="banco"></span>), <span class="f" data-f="pgto"></span></p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">6ª</span> Capacidade de hospedagem</h3>
+      <p><span class="f" data-f="pessoas">___</span> pessoa(s). Caso seja detectada a presença de mais hóspedes, será cobrada a taxa de R$ 500,00 (quinhentos reais) por pessoa, o que fica desde já autorizado pelo LOCATÁRIO.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">7ª</span> Da utilização do imóvel</h3>
+      <p>O imóvel será utilizado exclusivamente para fins de veraneio/temporada residencial. Eventos serão permitidos mediante autorização expressa da LOCADORA, sob pena da cobrança no valor de dez diárias. Animais de estimação são <span class="f" data-f="pet"></span>, incidindo, quando permitidos, taxa extra de R$ 150,00 (cento e cinquenta reais) por diária, sendo que, caso sejam deixados fezes ou urina no imóvel, será cobrada taxa de limpeza no valor de R$ 150,00 (cento e cinquenta reais).</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">8ª</span> Da proibição de crianças</h3>
+      <p>Crianças de 9 (nove) meses a 14 (quatorze) anos são expressamente proibidas, por risco de acidentes.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">9ª</span> Responsabilidades do locatário</h3>
+      <ul class="sub">
+        <li data-mark="a)">Manter o imóvel locado no exato estado em que o recebeu, conservando a sua limpeza e asseio, o que também inclui os móveis e utensílios que o guarnecem;</li>
+        <li data-mark="b)">Não ceder os direitos deste contrato a terceiros, sob qualquer hipótese;</li>
+        <li data-mark="c)">Responsabilizar-se integralmente pela guarda de seus pertences e valores, trancando todas as portas ao sair e ao fazer o checkout;</li>
+        <li data-mark="d)">Responsabilizar-se por qualquer dano que venha a causar ao imóvel ou aos bens que o guarnecem, devendo restituí-los nas mesmas condições em que os recebeu e repor/indenizar pela perda/dano a utensílios, móveis e eletrodomésticos, inclusive controles remotos.</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">10ª</span> Acordo entre as partes</h3>
+      <ul class="sub">
+        <li data-mark="a)">A LOCADORA não se responsabiliza por casos fortuitos ou de força maior, como falta de energia elétrica ou de água, decorrentes de falhas no serviço público ou eventos da natureza, bem como por barulhos ou perturbações causadas pelos imóveis vizinhos;</li>
+        <li data-mark="b)">O imóvel está equipado com câmeras, responsabilizando-se a LOCADORA pela privacidade das imagens;</li>
+        <li data-mark="c)">Quaisquer notificações ou comunicações entre as partes se farão por meio de WhatsApp e/ou e-mail, de modo que seu envio pode ser considerado como efetivada a notificação;</li>
+        <li data-mark="d)">As partes conferem ao presente o efeito de título executivo extrajudicial, de modo que todas as pendências financeiras poderão ser cobradas judicialmente, estando desde já autorizada a inserção dos dados do devedor nos cadastros de inadimplentes e, caso haja a necessidade de cobrança judicial ou extrajudicial, haverá a incidência de honorários advocatícios no importe de 20% (vinte por cento);</li>
+        <li data-mark="e)">A LOCADORA não se responsabiliza por acidentes no imóvel, informando tratar-se de área em declive e de construção em altitude, de modo que o LOCATÁRIO assume todos os riscos decorrentes dessas condições e por qualquer acidente com insetos ou animais peçonhentos;</li>
+        <li data-mark="f)">A LOCADORA não poderá ser responsabilizada por ocorrências relacionadas aos bens do LOCATÁRIO, inclusive por furtos e similares.</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">11ª</span> Da desistência</h3>
+      <p>A desistência da locação importará na perda dos valores já quitados.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">12ª</span> Cláusula penal</h3>
+      <p>A parte que infringir as cláusulas do presente contrato estará sujeita à multa no valor de 50% (cinquenta por cento) do valor total do presente instrumento.</p>
+    </div>
+
+    <div class="clause">
+      <h3><span class="num">13ª</span> Foro</h3>
+      <p>Fica eleito o foro da comarca de Goiânia, Estado de Goiás, como próprio para julgar qualquer demanda que resulte da execução deste contrato, renunciando-se a qualquer outro, por mais privilegiado que o seja.</p>
+    </div>
+
+    <p style="margin:26px 0 0;font-size:15px"><span class="f" data-f="local_data">___</span>.</p>
+
+    <!-- ASSINATURAS -->
+    <div class="sign-wrap">
+      <label class="accept no-print"><input type="checkbox" id="accept"><span>Li e concordo integralmente com os termos deste contrato de locação por temporada.</span></label>
+
+      <div class="sigs">
+        <div class="sig">
+          <h4>Locatário</h4>
+          <div class="pad" id="pad"><canvas id="canvas"></canvas><div class="ph">Assine aqui com o dedo</div></div>
+          <div class="sig-line"><strong data-f="nome">Locatário</strong>CPF <span data-f="cpf">___</span></div>
+        </div>
+        <div class="sig">
+          <h4>Locadora</h4>
+          <div class="owner-box"><span>Roberta Gebrin Las Casas</span></div>
+          <div class="sig-line"><strong>Roberta Gebrin Las Casas</strong>CPF 803.999.241-91</div>
+        </div>
+      </div>
+      <p class="stamp" id="stamp"></p>
+    </div>
+  </section>
+
+  <!-- AÇÕES -->
+  <div class="toolbar no-print">
+    <button class="act btn-ghost" id="clear">Limpar assinatura</button>
+    <button class="act btn-primary" id="finish">Concluir e gerar contrato assinado</button>
+  </div>
+  <p class="note no-print">Ao concluir, abre-se a janela de impressão — escolha <strong>“Salvar como PDF”</strong> para guardar o contrato assinado. O arquivo é o comprovante da locação.</p>
+
+</div>
+
+<script>
+(function(){
+  // ---- Preenchimento automático dos campos ----
+  var inputs = document.querySelectorAll('[data-k]');
+  var fmtDate = function(v){
+    if(!v) return '';
+    var p = v.split('-'); if(p.length!==3) return v;
+    var m = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    return parseInt(p[2],10)+' de '+m[parseInt(p[1],10)-1]+' de '+p[0];
+  };
+  function fill(k, raw){
+    var val = raw;
+    if(k==='checkin'||k==='checkout') val = fmtDate(raw);
+    var targets = document.querySelectorAll('[data-f="'+k+'"]');
+    for(var i=0;i<targets.length;i++){
+      var t = targets[i];
+      if(val && val.trim()!==''){ t.textContent = val; t.classList.remove('empty'); }
+      else { t.textContent = t.getAttribute('data-ph') || '___'; if(k!=='nome') t.classList.add('empty'); }
+    }
+  }
+  inputs.forEach(function(inp){
+    // valor inicial (para campos já preenchidos: locadora, imóvel, banco, pgto, pet)
+    fill(inp.getAttribute('data-k'), inp.value);
+    inp.addEventListener('input', function(){ fill(this.getAttribute('data-k'), this.value); });
+    inp.addEventListener('change', function(){ fill(this.getAttribute('data-k'), this.value); });
+  });
+
+  // ---- Assinatura (canvas) ----
+  var pad = document.getElementById('pad');
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var drawing = false, hasSig = false, last=null;
+  function resize(){
+    var r = canvas.getBoundingClientRect();
+    var dpr = window.devicePixelRatio||1;
+    var data = hasSig ? canvas.toDataURL() : null;
+    canvas.width = r.width*dpr; canvas.height = r.height*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.lineWidth = 2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#26302A';
+    if(data){ var img=new Image(); img.onload=function(){ctx.drawImage(img,0,0,r.width,r.height);}; img.src=data; }
+  }
+  function pos(e){
+    var r = canvas.getBoundingClientRect();
+    var pt = e.touches ? e.touches[0] : e;
+    return {x: pt.clientX-r.left, y: pt.clientY-r.top};
+  }
+  function start(e){ e.preventDefault(); drawing=true; last=pos(e); }
+  function move(e){
+    if(!drawing) return; e.preventDefault();
+    var p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke();
+    last=p; if(!hasSig){ hasSig=true; pad.classList.add('signed'); }
+  }
+  function end(){ drawing=false; }
+  canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false});
+  canvas.addEventListener('touchmove',move,{passive:false});
+  canvas.addEventListener('touchend',end);
+  window.addEventListener('resize',resize);
+  setTimeout(resize,60);
+
+  document.getElementById('clear').addEventListener('click',function(){
+    ctx.clearRect(0,0,canvas.width,canvas.height); hasSig=false; pad.classList.remove('signed');
+    document.getElementById('stamp').textContent='';
+  });
+
+  // ---- Concluir ----
+  document.getElementById('finish').addEventListener('click',function(){
+    var nome = document.querySelector('[data-k="nome"]').value.trim();
+    if(!nome){ alert('Preencha o nome do locatário antes de concluir.'); return; }
+    if(!hasSig){ alert('O locatário precisa assinar no campo indicado.'); return; }
+    if(!document.getElementById('accept').checked){ alert('É necessário marcar o aceite dos termos do contrato.'); return; }
+    var now = new Date();
+    var dd = now.toLocaleDateString('pt-BR');
+    var hh = now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('stamp').textContent = 'Aceito e assinado eletronicamente por '+nome+' em '+dd+' às '+hh+'.';
+    setTimeout(function(){ window.print(); }, 150);
+  });
+})();
+</script>
+</body>
+</html>
