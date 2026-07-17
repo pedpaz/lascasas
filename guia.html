@@ -276,6 +276,7 @@ footer .small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color
       <div class="datarow"><div><div class="k">Ponto de referência</div><div class="v ph">Ao lado da Villa Grécia Piri (apenas referência). Na mesma estrada fica o Restaurante Pilares — se passar por ele, está no caminho certo.</div></div></div>
       <div class="btnrow">
         <a class="btn btn-primary" id="mapsBtn" href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn btn-primary" id="wazeBtn" href="#" target="_blank" rel="noopener" style="margin-top:8px">Abrir no Waze</a>
       </div>
     </div>
     <ul class="clean" style="margin-top:18px">
@@ -495,6 +496,7 @@ footer .small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color
     <button class="fabitem" data-copy="wifipass">Wi-Fi · senha</button>
     <button class="fabitem" data-copy="door">Porta · senha</button>
     <a class="fabitem" id="fabMaps" href="#" target="_blank" rel="noopener">Localização</a>
+    <a class="fabitem" id="fabWaze" href="#" target="_blank" rel="noopener">Waze</a>
     <a class="fabitem" id="fabWpp" href="#" target="_blank" rel="noopener">WhatsApp</a>
   </div>
   <button class="fabtoggle" id="fabtoggle" aria-label="Ações rápidas">
@@ -507,8 +509,9 @@ footer .small{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color
   "use strict";
   var WPP="5562981771013";
   var MAPS="https://maps.app.goo.gl/UdUZTQ8txw266BSj8";
+  var WAZE="https://waze.com/ul?ll=-15.849069,-48.909940&navigate=yes";
   function setHref(id,url){var e=document.getElementById(id);if(e)e.href=url;}
-  setHref("mapsBtn",MAPS); setHref("fabMaps",MAPS);
+  setHref("mapsBtn",MAPS); setHref("fabMaps",MAPS); setHref("wazeBtn",WAZE); setHref("fabWaze",WAZE);
   var wppBase="https://wa.me/"+WPP;
   setHref("wppBtn",wppBase+"?text="+encodeURIComponent("Olá! Sou hóspede da Las Casas Piri e preciso de uma ajuda."));
   setHref("fabWpp",wppBase);
