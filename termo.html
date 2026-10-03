@@ -178,7 +178,7 @@ canvas#sigCanvas:focus{border-color:rgba(192,125,87,.55)}
       </div>
       <div class="field">
         <label>Horário previsto de chegada</label>
-        <input type="time" id="chora" value="15:00">
+        <input type="time" id="chora" value="14:00">
       </div>
       <div class="field" id="f-pets">
         <label>Animais de estimação?</label>
@@ -187,7 +187,7 @@ canvas#sigCanvas:focus{border-color:rgba(192,125,87,.55)}
           <option value="sim">Sim (taxa adicional a combinar)</option>
         </select>
       </div>
-      <div class="info-note"><strong>Atenção:</strong> Check-in a partir das 15h · Check-out até as 12h. Saída fora do prazo sujeita a multa de R$ 2.000/dia.</div>
+      <div class="info-note"><strong>Atenção:</strong> Check-in a partir das 14h · Check-out até as 12h. Saída fora do prazo sujeita a multa de R$ 2.000/dia.</div>
     </div>
     <div class="btnrow" style="margin-top:20px">
       <button class="btn btn-back" id="back2">← Voltar</button>
@@ -540,7 +540,7 @@ function buildPDF(){
   doc.text('4. PRAZO', M, y); nl(5);
   doc.setFont('helvetica','normal'); doc.setTextColor(30,30,30);
   const nights = state.cin&&state.cout ? Math.round((new Date(state.cout)-new Date(state.cin))/86400000) : '?';
-  const prazoTxt = `Check-in: ${fmtDate(state.cin)} a partir das 15h (chegada prevista: ${state.chora||'—'}). Check-out: ${fmtDate(state.cout)} até as 12h. Total: ${nights} diária(s). A não desocupação no prazo sujeita o locatário a multa de R$ 2.000,00 por dia.`;
+  const prazoTxt = `Check-in: ${fmtDate(state.cin)} a partir das 14h (chegada prevista: ${state.chora||'—'}). Check-out: ${fmtDate(state.cout)} até as 12h. Total: ${nights} diária(s). A não desocupação no prazo sujeita o locatário a multa de R$ 2.000,00 por dia.`;
   const prazoLines = doc.splitTextToSize(prazoTxt, TW);
   doc.text(prazoLines, M, y); y += prazoLines.length*4.5; nl(4);
 
